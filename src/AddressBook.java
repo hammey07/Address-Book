@@ -49,12 +49,10 @@ class AddressBook {
                     break;
 
                 case 2: // DELETE A CONTACT RECORD
-                    System.out.println("PLEASE SELECT CONTACT \"ID\" FROM LIST TO REMOVE");
                     personList.sort(new IdSort());
-                    System.out.println("ID | FULL NAME");
-                    for (Person person : personList) {
-                        System.out.println(person.getId() + "  | " + person.getFirstname() + " " + person.getLastname());
-                    }
+                    displayContactList();
+                    System.out.println("PLEASE SELECT CONTACT \"ID\" FROM LIST ABOVE TO REMOVE");
+
                     Scanner sc2 = new Scanner(System.in);
                     System.out.println("Please Enter Contact ID to remove");
                     int in = sc2.nextInt();
@@ -70,45 +68,45 @@ class AddressBook {
                     break;
                 case 3: // EDIT A CONTACT RECORD
 
+
                     break;
+
                 case 4: //GET SPECIFIC CONTACT RECORD INFORMATION
                     personList.sort(new IdSort());
-                    System.out.println("ID | FULL NAME");
-                    for (Person person : personList) {
-                        System.out.println(person.getId() + "  | " + person.getFirstname() + " " + person.getLastname());
-                    }
+                    displayContactList();
+                    System.out.println("PLEASE ENTER CONTACT \"ID\" TO RETRIEVE SPECIFIC DETAILS");
                     Scanner sc3 = new Scanner(System.in);
-                    System.out.println("Please Enter Contact ID to retrieve Details");
                     int inp = sc3.nextInt();
                     System.out.println(getContactInformation(inp));
                     exit = backToMenu();
                     break;
                 case 5: // LIST ALL CONTACTS BY FIRST NAME
-                    personList.sort(new FirstnameSort());
                     System.out.println("Sorting Contacts by Firstname");
-                    System.out.println("ID | FULL NAME");
-
-                    for (Person person : personList) {
-                        System.out.println(person.getId() + "  | " + person.getFirstname() + " " + person.getLastname());
-                    }
+                    personList.sort(new FirstnameSort());
+                    displayContactList();
                     exit = backToMenu();
                     break;
                 case 6: // LIST ALL CONTACTS BY LAST NAME
-                    personList.sort(new LastnameSort());
                     System.out.println("Sorting Contacts by Lastname");
-                    System.out.println("ID | FULL NAME");
-                    for (Person person : personList) {
-                        System.out.println(person.getId() + "  | " + person.getFirstname() + " " + person.getLastname());
-                    }
+                    personList.sort(new LastnameSort());
+                    displayContactList();
                     exit = backToMenu();
                     break;
                 case 7: // EXIT APPLICATION
+                    System.out.println("Thank you for using this application! GoodBye");
                     exit = true;
                     break;
             }
         }
 
 
+    }
+
+    private static void displayContactList() {
+        System.out.println("ID | FULL NAME");
+        for (Person person : personList) {
+            System.out.println(person.getId() + "  | " + person.getFirstname() + " " + person.getLastname());
+        }
     }
 
     private static String getContactInformation(int inp) {
