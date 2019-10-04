@@ -1,12 +1,13 @@
-public class Person {
+class Person {
     private String firstname;
     private String lastname;
     private String phone;
     private String address;
     private int id;
+    private static int counter = 0;
 
-    Person(int id, String firstname, String lastname, String phone, String address) {
-        this.id = id;
+    Person(String firstname, String lastname, String phone, String address) {
+        this.id = counter++;
         this.firstname = firstname;
         this.lastname = lastname;
         this.phone = phone;

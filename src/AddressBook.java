@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class AddressBook {
+class AddressBook {
     private static ArrayList<Person> personList = new ArrayList<>();
 
     public static void main(String[] args) {
-        personList.add(new Person(personList.size(), "John", "O'Sullivan", "0831835567", "5, Suir house"));
+        personList.add(new Person("John", "O'Sullivan", "0831835567", "5, Suir house"));
         System.out.println(personList);
 
         chooseOption();
@@ -27,7 +27,7 @@ public class AddressBook {
             System.out.println("7)Exit");
             selection = sc.nextInt();
             switch (selection) {
-                case 1:
+                case 1: //ADD A CONTACT
                     sc = new Scanner(System.in);
                     System.out.println("Enter Contact Firstname: ");
                     String firstname = sc.nextLine();
@@ -41,14 +41,14 @@ public class AddressBook {
                     Scanner sc1 = new Scanner(System.in);
                     String input = sc1.next();
                     if (input.equalsIgnoreCase("yes")) {
-                        personList.add(new Person(personList.size(), firstname, lastname, phone, address));
+                        personList.add(new Person(firstname, lastname, phone, address));
                         System.out.println("Details saved");
                     } else if (input.equalsIgnoreCase("no")) {
                         System.out.println("Details Discarded");
                     }
                     break;
 
-                case 2:
+                case 2: // DELETE A RECORD
                     System.out.println("PLEASE SELECT CONTACT \"ID\" FROM LIST TO REMOVE");
                     personList.sort(new IdSort());
                     System.out.println("ID | FULL NAME");
@@ -117,6 +117,7 @@ public class AddressBook {
         for (int i = 0; i < personList.size(); i++) {
             if (personList.get(i).getId() == in) {
                 personList.remove(i);
+                System.out.println("Contact REMOVED successfully!");
                 break;
             }
         }
