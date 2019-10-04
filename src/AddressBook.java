@@ -3,11 +3,9 @@ import java.util.Scanner;
 
 class AddressBook {
     private static ArrayList<Person> personList = new ArrayList<>();
-
     public static void main(String[] args) {
         personList.add(new Person("John", "O'Sullivan", "0831835567", "5, Suir house"));
         System.out.println(personList);
-
         chooseOption();
     }
 
@@ -17,7 +15,7 @@ class AddressBook {
         boolean exit = false;
         while (!exit) {
             System.out.println("Menu : ");
-            System.out.println("Type any number between 1 and 6 for selection");
+            System.out.println("Type any number between 1 and 7 for selection");
             System.out.println("1)Create a new Contact Record");
             System.out.println("2)Remove a Contact Record");
             System.out.println("3)Edit a Contact Record");
@@ -27,6 +25,7 @@ class AddressBook {
             System.out.println("7)Exit");
             selection = sc.nextInt();
             switch (selection) {
+
                 case 1: //ADD A CONTACT
                     sc = new Scanner(System.in);
                     System.out.println("Enter Contact Firstname: ");
@@ -39,11 +38,11 @@ class AddressBook {
                     String address = sc.nextLine();
                     System.out.println("Do you want to save this contact to address book? Type Yes / No");
                     Scanner sc1 = new Scanner(System.in);
-                    String input = sc1.next();
-                    if (input.equalsIgnoreCase("yes")) {
+                    String choice1 = sc1.next();
+                    if (choice1.equalsIgnoreCase("yes")) {
                         personList.add(new Person(firstname, lastname, phone, address));
                         System.out.println("Details saved");
-                    } else if (input.equalsIgnoreCase("no")) {
+                    } else if (choice1.equalsIgnoreCase("no")) {
                         System.out.println("Details Discarded");
                     }
                     break;
@@ -52,13 +51,13 @@ class AddressBook {
                     personList.sort(new IdSort());
                     displayContactList();
                     System.out.println("PLEASE SELECT CONTACT \"ID\" FROM LIST ABOVE TO REMOVE");
-
                     Scanner sc2 = new Scanner(System.in);
                     System.out.println("Please Enter Contact ID to remove");
                     int in = sc2.nextInt();
-                    System.out.println("Are you sure you want to remove this contact? (Type Yes / No): \n" + checkArray(in));
-                    String choice = sc2.next();
-                    if (choice.equalsIgnoreCase("yes")) {
+                    System.out.println("Are you sure you want to remove this contact? (Type Yes / No):");
+                    System.out.println(checkArray(in));
+                    String choice2 = sc2.next();
+                    if (choice2.equalsIgnoreCase("yes")) {
                         removeContact(in);
 
                     } else {
@@ -66,40 +65,83 @@ class AddressBook {
                     }
                     exit = backToMenu();
                     break;
+
                 case 3: // EDIT A CONTACT RECORD
-
-
+                    displayContactList();
+                    System.out.println("PLEASE SELECT CONTACT \"ID\" FROM LIST ABOVE TO EDIT");
+                    Scanner sc3 = new Scanner(System.in);
+                    int choice3 = sc3.nextInt();
+                    editContact(choice3);
+                    System.out.println("Changes Saved!");
+                    exit = backToMenu();
                     break;
 
                 case 4: //GET SPECIFIC CONTACT RECORD INFORMATION
                     personList.sort(new IdSort());
                     displayContactList();
                     System.out.println("PLEASE ENTER CONTACT \"ID\" TO RETRIEVE SPECIFIC DETAILS");
-                    Scanner sc3 = new Scanner(System.in);
-                    int inp = sc3.nextInt();
-                    System.out.println(getContactInformation(inp));
+                    Scanner sc4 = new Scanner(System.in);
+                    int in3 = sc4.nextInt();
+                    System.out.println(getContactInformation(in3));
                     exit = backToMenu();
                     break;
+
                 case 5: // LIST ALL CONTACTS BY FIRST NAME
                     System.out.println("Sorting Contacts by Firstname");
                     personList.sort(new FirstnameSort());
                     displayContactList();
                     exit = backToMenu();
                     break;
+
                 case 6: // LIST ALL CONTACTS BY LAST NAME
                     System.out.println("Sorting Contacts by Lastname");
                     personList.sort(new LastnameSort());
                     displayContactList();
                     exit = backToMenu();
                     break;
+
                 case 7: // EXIT APPLICATION
                     System.out.println("Thank you for using this application! GoodBye");
                     exit = true;
                     break;
             }
         }
+    }
 
+    private static void editContact(int choice3) {
+        for (Person person : personList) {
+            if (person.getId() == choice3) {
+                Scanner input = new Scanner(System.in);
+                System.out.println("Please enter Contact First Name." + " Current Value : " + person.getFirstname());
+                System.out.println("Please leave blank if no changes required");
+                String firstname = input.nextLine();
+                if (!firstname.equals("")) {
+                    person.setFirstname(firstname);
+                }
 
+                System.out.println("Please enter Contact Last Name." + " Current Value : " + person.getLastname());
+                System.out.println("Please leave blank if no changes required");
+                String lastname = input.nextLine();
+                if (!lastname.equals("")) {
+                    person.setLastname(lastname);
+                }
+
+                System.out.println("Please enter Contact Address." + " Current Value : " + person.getAddress());
+                System.out.println("Please leave blank if no changes required");
+                String address = input.nextLine();
+                if (!address.equals("")) {
+                    person.setAddress(address);
+                }
+
+                System.out.println("Please enter Contact Phone." + " Current Value : " + person.getPhone());
+                System.out.println("Please leave blank if no changes required");
+                String phone = input.nextLine();
+                if (!phone.equals("")) {
+                    person.setPhone(phone);
+                }
+                break;
+            }
+        }
     }
 
     private static void displayContactList() {
@@ -116,7 +158,6 @@ class AddressBook {
                 id = personList.indexOf(p);
             }
         }
-
         return "ID : " + personList.get(id).getId() + "\n" +
                 "First Name : " + personList.get(id).getFirstname() + "\n" +
                 "Last Name : " + personList.get(id).getLastname() + "\n" +
@@ -134,7 +175,6 @@ class AddressBook {
         return personList.get(id);
     }
 
-
     private static void removeContact(int in) {
         for (int i = 0; i < personList.size(); i++) {
             if (personList.get(i).getId() == in) {
@@ -149,8 +189,7 @@ class AddressBook {
         boolean exit = false;
         System.out.println("Return to Main Menu? Type Yes / No");
         Scanner sc2 = new Scanner(System.in);
-        if (sc2.next().
-                equalsIgnoreCase("no"))
+        if (sc2.next().equalsIgnoreCase("no"))
             exit = true;
         return exit;
     }

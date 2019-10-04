@@ -18,15 +18,15 @@ class Person {
         return id;
     }
 
-    public void setId(int id) {
+  /*  public void setId(int id) {
         this.id = id;
-    }
+    }*/
 
     String getFirstname() {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
+    void setFirstname(String firstname) {
         this.firstname = firstname;
     }
 
@@ -34,23 +34,23 @@ class Person {
         return lastname;
     }
 
-    public void setLastname(String lastname) {
+    void setLastname(String lastname) {
         this.lastname = lastname;
     }
 
-    public String getPhone() {
+    String getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public String getAddress() {
+    String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    void setAddress(String address) {
         this.address = address;
     }
 
@@ -64,6 +64,4 @@ class Person {
                 ", address='" + address + '\'' +
                 '}' + "\n";
     }
-
-
 }
