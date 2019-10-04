@@ -48,7 +48,7 @@ class AddressBook {
                     }
                     break;
 
-                case 2: // DELETE A RECORD
+                case 2: // DELETE A CONTACT RECORD
                     System.out.println("PLEASE SELECT CONTACT \"ID\" FROM LIST TO REMOVE");
                     personList.sort(new IdSort());
                     System.out.println("ID | FULL NAME");
@@ -68,13 +68,22 @@ class AddressBook {
                     }
                     exit = backToMenu();
                     break;
-                case 3:
+                case 3: // EDIT A CONTACT RECORD
 
                     break;
-                case 4:
-
+                case 4: //GET SPECIFIC CONTACT RECORD INFORMATION
+                    personList.sort(new IdSort());
+                    System.out.println("ID | FULL NAME");
+                    for (Person person : personList) {
+                        System.out.println(person.getId() + "  | " + person.getFirstname() + " " + person.getLastname());
+                    }
+                    Scanner sc3 = new Scanner(System.in);
+                    System.out.println("Please Enter Contact ID to retrieve Details");
+                    int inp = sc3.nextInt();
+                    System.out.println(getContactInformation(inp));
+                    exit = backToMenu();
                     break;
-                case 5:
+                case 5: // LIST ALL CONTACTS BY FIRST NAME
                     personList.sort(new FirstnameSort());
                     System.out.println("Sorting Contacts by Firstname");
                     System.out.println("ID | FULL NAME");
@@ -84,7 +93,7 @@ class AddressBook {
                     }
                     exit = backToMenu();
                     break;
-                case 6:
+                case 6: // LIST ALL CONTACTS BY LAST NAME
                     personList.sort(new LastnameSort());
                     System.out.println("Sorting Contacts by Lastname");
                     System.out.println("ID | FULL NAME");
@@ -93,13 +102,28 @@ class AddressBook {
                     }
                     exit = backToMenu();
                     break;
-                case 7:
+                case 7: // EXIT APPLICATION
                     exit = true;
                     break;
             }
         }
 
 
+    }
+
+    private static String getContactInformation(int inp) {
+        int id = 0;
+        for (Person p : personList) {
+            if (p.getId() == inp) {
+                id = personList.indexOf(p);
+            }
+        }
+
+        return "ID : " + personList.get(id).getId() + "\n" +
+                "First Name : " + personList.get(id).getFirstname() + "\n" +
+                "Last Name : " + personList.get(id).getLastname() + "\n" +
+                "Address : " + personList.get(id).getAddress() + "\n" +
+                "Phone : " + personList.get(id).getPhone();
     }
 
     private static Person checkArray(int in) {
