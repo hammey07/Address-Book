@@ -3,15 +3,25 @@ public class Person {
     private String lastname;
     private String phone;
     private String address;
+    private int id;
 
-    public Person(String firstname, String lastname, String phone, String address) {
+    Person(int id, String firstname, String lastname, String phone, String address) {
+        this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.phone = phone;
         this.address = address;
     }
 
-    public String getFirstname() {
+    int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    String getFirstname() {
         return firstname;
     }
 
@@ -19,7 +29,7 @@ public class Person {
         this.firstname = firstname;
     }
 
-    public String getLastname() {
+    String getLastname() {
         return lastname;
     }
 
@@ -41,6 +51,17 @@ public class Person {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id='" + id + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                '}' + "\n";
     }
 
 
