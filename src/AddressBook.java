@@ -52,7 +52,7 @@ class AddressBook {
                             displayContactList(personSorter.sort(personList, "id"));
                             Scanner sc2 = new Scanner(System.in);
                             while (true) {
-                                System.out.println("Please Enter Correct Contact ID to remove, enter \"exit\" to go back to Main Menu. ");
+                                System.out.println("Please Type Correct Contact ID to remove OR enter \"exit\" to go back to Main Menu. ");
                                 String input = sc2.next();
                                 if (input.equalsIgnoreCase("exit")) {
                                     break;
@@ -80,14 +80,13 @@ class AddressBook {
                                     }
                                 }
                             }
-                            exit = backToMenu();
                             break;
 
                         case 3: // EDIT A CONTACT RECORD
                             displayContactList(personList);
                             Scanner sc3 = new Scanner(System.in);
                             while (true) {
-                                System.out.println("Please Enter Correct Contact ID to Edit, enter \"exit\" to go back to Main Menu. ");
+                                System.out.println("Please Type Correct Contact ID to Edit OR enter \"exit\" to go back to Main Menu. ");
                                 String input = sc3.next();
                                 if (input.equalsIgnoreCase("exit")) {
                                     break;
@@ -108,44 +107,34 @@ class AddressBook {
                                     }
                                 }
                             }
-                            exit = backToMenu();
                             break;
-
-
-//                            displayContactList(personList);
-//                            System.out.println("PLEASE SELECT CONTACT \"ID\" FROM LIST ABOVE TO EDIT");
-//                            Scanner sc3 = new Scanner(System.in);
-//                            String choice3 = sc3.next();
-//                            boolean check = true;
-//                            while (check){
-//                                try {
-//                                    if (listOfAllId(personList).contains(choice3)){
-//                                        int userIntValue = Integer.parseInt(choice3);
-//                                        for (Person p : personList) {
-//                                        if (p.getId() == userIntValue) {
-//                                            check = false;
-//                                            editContact(userIntValue);
-//                                            System.out.println("Changes Saved!");
-//                                            break;
-//                                        }
-//                                    }
-//                                }
-//                                }
-//                                catch (NumberFormatException e){
-//                                    System.out.println("Please enter valid ID");
-//                                    check = true;
-//                                }
-//                            }
-//                            exit = backToMenu();
-//                            break;
 
                         case 4: //GET SPECIFIC CONTACT RECORD INFORMATION
                             displayContactList(personSorter.sort(personList, "id"));
                             System.out.println("PLEASE ENTER CONTACT \"ID\" TO RETRIEVE SPECIFIC DETAILS");
                             Scanner sc4 = new Scanner(System.in);
-                            int in3 = sc4.nextInt();
-                            System.out.println(getContactInformation(in3));
-                            exit = backToMenu();
+                            while (true) {
+                                System.out.println("Please Type Correct Contact ID to get Details OR Type \"exit\" to go back to Main Menu. ");
+                                String input = sc4.next();
+                                if (input.equalsIgnoreCase("exit")) {
+                                    break;
+                                }
+                                int choice4;
+                                try {
+                                    choice4 = Integer.parseInt(input);
+                                } catch (NumberFormatException n) {
+                                    System.out.println("Please enter a valid numeric value.");
+                                    continue;
+                                }
+                                for (Person p : personList) {
+                                    if (p.getId() == choice4) {
+                                        System.out.print("Contact ID found!");
+                                        System.out.println(getContactInformation(choice4));
+                                        break;
+                                    }
+                                }
+                            }
+                            // exit = backToMenu();
                             break;
 
                         case 5: // LIST ALL CONTACTS BY FIRST NAME
@@ -159,22 +148,22 @@ class AddressBook {
                             displayContactList(personSorter.sort(personList, "lastname"));
                             exit = backToMenu();
                             break;
+
                         case 7: // TOTAL NUMBER OF SAVED CONTACTS
                             System.out.println(countContacts());
                             exit = backToMenu();
                             break;
+
                         case 8: // EXIT APPLICATION
                             System.out.println("Thank you for using this application! GoodBye");
                             exit = true;
                             break;
-
                         default:
                             System.out.println("Please enter correct input. Returning to main menu...");
                     }
                 } catch (NumberFormatException e) {
                     System.out.println("Please enter a valid Choice Number");
                 }
-
             }
         }
     }
@@ -226,7 +215,6 @@ class AddressBook {
                 break;
             }
         }
-
     }
 
     private static void displayContactList(List<Person> personList) {
@@ -251,7 +239,6 @@ class AddressBook {
     }
 
     private static Person checkArray(int in) {
-
         Person personFound = null;
         for (Person p : personList) {
             if (p.getId() == in) {
